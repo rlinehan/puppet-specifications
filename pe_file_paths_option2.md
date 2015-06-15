@@ -22,15 +22,15 @@ The files annotated by an '*' indicate that they are created by package installa
     Path                                  Setting                        3.x
     /etc/puppetlabs *                                                    n/a
 
-    /etc/puppetlabs/code *                # :codedir                     contents moved from :confdir
-        environments *                    # :environmentpath
-          production *
-            environment.conf *
-            manifests *
-            modules *
-        hiera.yaml *                      # :hiera_config
-        hieradata *                       # n/a
-        modules *                         # user modulepath
+    /etc/puppetlabs/code *                # NOT :codedir. Where users lay down and interact with code
+        environments
+          production
+            environment.conf
+            manifests
+            modules
+        hiera.yaml
+        hieradata
+        modules
 
     /etc/puppetlabs/mcollective *
         client.cfg *
@@ -88,6 +88,15 @@ The files annotated by an '*' indicate that they are created by package installa
             server_data                   # :server_datadir
             state                         # :statedir
             yaml                          # :yamldir
+        code                              # :codedir
+          environments                    # :environmentpath
+            production
+              environment.conf
+              manifests
+              modules
+          hiera.yaml                      # :hiera_config
+          hieradata                       # n/a
+          modules                         # user modulepath
         include *
             facter *
             openssl *
@@ -322,6 +331,9 @@ The package will install a service named `puppetserver`, create a
             puppetserver@                 -> /opt/puppetlabs/server/apps/puppetserver/bin/puppetserver
 
         data
+            filesync                      # file sync datadir
+                client
+                storage
             puppetserver                  # :vardir (and $HOME for services that use it)
                 bucket                    # :bucketdir
                 reports                   # :reportdir
