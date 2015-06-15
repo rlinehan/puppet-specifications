@@ -32,6 +32,16 @@ The files annotated by an '*' indicate that they are created by package installa
         hieradata *                       # n/a
         modules *                         # user modulepath
 
+    /etc/puppetlabs/code_staging          # Where users lay down and interact with code
+        environments
+          production
+            environment.conf
+            manifests
+            modules
+          hiera.yaml
+          hieradata
+          modules
+
     /etc/puppetlabs/mcollective *
         client.cfg *
         facts.yaml *
@@ -322,6 +332,9 @@ The package will install a service named `puppetserver`, create a
             puppetserver@                 -> /opt/puppetlabs/server/apps/puppetserver/bin/puppetserver
 
         data
+            filesync                      # file sync datadir
+                client
+                storage
             puppetserver                  # :vardir (and $HOME for services that use it)
                 bucket                    # :bucketdir
                 reports                   # :reportdir
